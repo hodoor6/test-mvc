@@ -1,8 +1,7 @@
 <?php
-if ($_REQUEST['auth'] == 'auth') {
+if (isset($_REQUEST['auth']) == 'auth') {
     $name = $_REQUEST['name'];
     $password = $_REQUEST['password'];
-
 
     if ($name == 'admin' && $password == 'admin') {
         session_start();
@@ -37,7 +36,7 @@ if ($_REQUEST['auth'] == 'auth') {
 <body class="text-center">
 
 <form class="form-signin" action="" method="post">
-    <img class="mb-4" src="templates/images/apple-touch-icon.png" alt="" width="72" height="72">
+    <img class="mb-4" src="images/apple-touch-icon.png" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Авторизация</h1>
     <?php
     if (!empty($viewErrors)) { ?>
@@ -57,7 +56,7 @@ if ($_REQUEST['auth'] == 'auth') {
     } ?>
     <div class="form-group">
         <input class="form-control" type="text" required="required" minlength="5" id="name" placeholder="Логин"
-               name="name" value="<?= $name ?>">
+               name="name" value="<?= isset($name) ?>">
     </div>
     <div class="form-group">
         <input class="form-control" type="password" required="required" minlength="5" id="password" placeholder="Пароль"

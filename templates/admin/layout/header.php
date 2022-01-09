@@ -1,5 +1,8 @@
 <?php
-session_start(); ?>
+
+session_start();
+
+?>
 
 <!doctype html>
 <html lang="ru">
@@ -15,11 +18,12 @@ session_start(); ?>
     <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-       <!-- Custom styles for this template -->
+    <!-- Custom styles for this template -->
     <link rel="stylesheet" href="/templates/css/design.css">
     <!--Custom css-->
     <link rel="stylesheet" href="/templates/css/alert.css">
-    <title><?= $title ?></title>
-
+    <?php
+    ?>
+    <title><?= $title ?? "Нет заголовка"; ?></title>
 </head>
 <body>

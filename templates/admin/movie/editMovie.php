@@ -1,25 +1,16 @@
 <?php
 
-include($_SERVER['DOCUMENT_ROOT'] . '/core/connection.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/model/directors.php');
-
-//include($_SERVER['DOCUMENT_ROOT'] . '/model/movies.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . "/core/config/connection.php";
 
 ?>
-<!doctype html>
-<html lang="ru">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-
-    <title>Редактирование фильма</title>
-</head>
-<body class="bg-light">
+<?php
+$title = "Добавление фильма"; ?>
+<!--Connecting header-->
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . "/templates/admin/layout/header.php"; ?>
+<!--Connecting User menu-->
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . "/templates/admin/layout/user-menu.php" ?>
 <div class="container-fluid h-100  pt-3">
     <div class="row justify-content-center align-items-center">
         <h2>Редактирование фильма</h2>
@@ -32,20 +23,19 @@ include($_SERVER['DOCUMENT_ROOT'] . '/model/directors.php');
                 <div class="row">
                     <div class="card">
                         <div class="card-body">
-                            <form action="model/movies.php" METHOD="POST">
-                                <input type="hidden" name="updateMovieId" value="<?
+                            <form action="../../../model/movies.php" METHOD="POST">
+                                <input type="hidden" name="updateMovieId" value="<?php
                                 if (!empty($_GET['movieId'])) {
                                     echo $_GET['movieId'];
                                 }
                                 ?>">
-                                <?
+                                <?php
                                 foreach (
                                     $movies
                                     as $movie
                                 ): ?>
-                                    <?
+                                    <?php
                                     if ($movie->movieId == $_GET['movieId']) : ?>
-
                                         <div class="form-group">
                                             <label>Названия фильма</label>
                                             <input class="form-control" type="text" required="required" minlength="3"
@@ -72,23 +62,15 @@ include($_SERVER['DOCUMENT_ROOT'] . '/model/directors.php');
                                             <small class="form-text text-muted">Виберете дату выхода фильма</small>
                                         </div>
                                         <div class="form-group">
-                                            <label>Режиссер</label>
-                                            <select class="form-control" name="movieDirectorId"
-                                                    placeholder="Выберите режиссера">
+                                            <label>Выберите режиссёра</label>
+                                            <select class="form-control" name="movieDirectorId">
+                                                <option disabled="disabled">Выбранный Режиссер
+                                                    - <?= $movie->director_name ?></option>
                                                 <?php
-                                                foreach ($directors as $director) :
-                                                    if ($movie->directorId === $director->directorId) : ?>
-                                                        <option disabled="disabled">Выбранный Режиссер
-                                                            - <?= $director->name ?></option>
-                                                    <?php
-                                                    endif;
-                                                endforeach;
                                                 foreach (
-                                                    $directors
-                                                    as $director
+                                                    $directors as $director
                                                 ): ?>
-
-                                                    <?
+                                                    <?php
                                                     if ($movie->directorId === $director->directorId) : ?>
                                                         <option value="<?= $movie->directorId ?>" selected="selected"
                                                         ><?= $director->name ?>
@@ -98,7 +80,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/model/directors.php');
                                                             <?= $director->name ?></option>
                                                     <?php
                                                     endif; ?>
-                                                <?
+                                                <?php
                                                 endforeach; ?>
                                             </select>
                                         </div>
@@ -110,9 +92,9 @@ include($_SERVER['DOCUMENT_ROOT'] . '/model/directors.php');
                                                 </button>
                                             </div>
                                         </div>
-                                    <?
+                                    <?php
                                     endif; ?>
-                                <?
+                                <?php
                                 endforeach; ?>
 
                             </form>
@@ -121,15 +103,6 @@ include($_SERVER['DOCUMENT_ROOT'] . '/model/directors.php');
                 </div>
             </div>
         </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-                integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-                crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-                integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
-                crossorigin="anonymous"></script>
-</body>
-</html>
+        <!--Connecting footer-->
+        <?php
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/templates/admin/layout/footer.php"; ?>

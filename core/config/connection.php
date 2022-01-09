@@ -14,16 +14,20 @@ $opt = [
 ];
 $pdo = new PDO($dsn, $user, $pass, $opt);
 
-
 $stmt = $pdo->prepare("SELECT * FROM `director`");
 $stmt->execute();
-$directors= $row = $stmt->fetchAll(PDO::FETCH_OBJ);
+$directors = $row = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-//var_dump($directors->name);
-
-
-$stmt = $pdo->prepare("SELECT * FROM `movie`");
+$stmt = $pdo->prepare(
+    "SELECT *,
+       movie.name as name,
+       director.name as director_name
+FROM movie
+INNER JOIN director
+on movie.directorId = director.directorId;"
+);
 $stmt->execute();
-$movies= $row = $stmt->fetchAll(PDO::FETCH_OBJ);
+$movies = $row = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-//var_dump($movies);
+
+
